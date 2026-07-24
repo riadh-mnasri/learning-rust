@@ -2,7 +2,7 @@
 name = "learning-rust"
 version = "0.1.0"
 edition = "2021"
-description = "Parcours d'apprentissage du langage Rust, du zero absolu jusqu'aux bases de la concurrence et de l'async"
+description = "Parcours d'apprentissage du langage Rust, du zéro absolu jusqu'aux bases de la concurrence et de l'async"
 license = "MIT"
 authors = ["Riadh MNASRI"]
 publish = false
@@ -12,8 +12,8 @@ publish = false
 [dev-dependencies]
 tokio = { version = "1", features = ["rt-multi-thread", "macros", "time"] }
 
-# test = true sur chaque exemple permet a `cargo test` d'executer aussi
-# les tests inline definis dans examples/, pas seulement ceux de src/.
+# test = true sur chaque exemple permet à `cargo test` d'exécuter aussi
+# les tests inline définis dans examples/, pas seulement ceux de src/.
 [[example]]
 name = "01_hello_world"
 test = true

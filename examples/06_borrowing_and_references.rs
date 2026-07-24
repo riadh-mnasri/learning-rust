@@ -1,47 +1,47 @@
-// 06 - Emprunts et references
+// 06 - Emprunts et références
 //
 // Emprunter une valeur (&) permet de l'utiliser sans en prendre
-// possession. Regle d'or verifiee par le compilateur (le "borrow
-// checker") : a un instant donne, soit plusieurs references
-// immuables, soit une seule reference mutable, jamais les deux.
+// possession. Règle d'or vérifiée par le compilateur (le "borrow
+// checker") : à un instant donné, soit plusieurs références
+// immuables, soit une seule référence mutable, jamais les deux.
 //
 // Pour lancer cet exemple :
 //   cargo run --example 06_borrowing_and_references
 
-// clippy::ptr_arg desactive volontairement : calculer_longueur prend
-// &String plutot que &str pour illustrer l'emprunt d'un String avant
-// d'introduire &str juste apres. clippy::useless_vec desactive aussi,
-// vec! est utilise ici pour montrer sa syntaxe, pas parce qu'un tableau
+// clippy::ptr_arg désactivé volontairement : calculer_longueur prend
+// &String plutôt que &str pour illustrer l'emprunt d'un String avant
+// d'introduire &str juste après. clippy::useless_vec désactivé aussi,
+// vec! est utilisé ici pour montrer sa syntaxe, pas parce qu'un tableau
 // serait insuffisant.
 #![allow(clippy::ptr_arg, clippy::useless_vec)]
 
 fn main() {
     let texte = String::from("bonjour le monde");
 
-    // & cree une reference immuable : on prete la valeur sans la
-    // deplacer, `texte` reste utilisable apres l'appel.
+    // & crée une référence immuable : on prête la valeur sans la
+    // déplacer, `texte` reste utilisable après l'appel.
     let longueur = calculer_longueur(&texte);
-    println!("'{}' fait {} caracteres", texte, longueur);
+    println!("'{}' fait {} caractères", texte, longueur);
 
-    // &mut permet de modifier la valeur empruntee.
+    // &mut permet de modifier la valeur empruntée.
     let mut modifiable = String::from("bonjour");
     ajouter_suffixe(&mut modifiable);
-    println!("apres modification : {}", modifiable);
+    println!("après modification : {}", modifiable);
 
-    // Plusieurs references immuables simultanees : autorise.
+    // Plusieurs références immuables simultanées : autorisé.
     let a = &modifiable;
     let b = &modifiable;
-    println!("deux emprunts immuables en meme temps : {} / {}", a, b);
+    println!("deux emprunts immuables en même temps : {} / {}", a, b);
 
-    // En revanche, une reference mutable exclut toute autre reference
-    // (mutable ou non) tant qu'elle est utilisee. Le code suivant ne
-    // compile pas si on decommente les deux lignes ensemble :
+    // En revanche, une référence mutable exclut toute autre référence
+    // (mutable ou non) tant qu'elle est utilisée. Le code suivant ne
+    // compile pas si on décommente les deux lignes ensemble :
     // let ref_mut = &mut modifiable;
     // println!("{}", a); // erreur : `a` et `ref_mut` ne peuvent pas coexister
 
-    // Slices : une reference vers une partie contigue d'une collection,
-    // sans copier les donnees.
-    let phrase = String::from("Rust est agreable a apprendre");
+    // Slices : une référence vers une partie contiguë d'une collection,
+    // sans copier les données.
+    let phrase = String::from("Rust est agréable à apprendre");
     let premier_mot = extraire_premier_mot(&phrase);
     println!("premier mot : {}", premier_mot);
 
@@ -50,18 +50,18 @@ fn main() {
     println!("slice de nombres : {:?}", extrait);
 }
 
-// Prendre `&String` en parametre signifie "j'emprunte, je ne prends pas
+// Prendre `&String` en paramètre signifie "j'emprunte, je ne prends pas
 // possession". Appeler cette fonction ne consomme donc pas `texte`.
 fn calculer_longueur(s: &String) -> usize {
     s.len()
 }
 
 fn ajouter_suffixe(s: &mut String) {
-    s.push_str(" (modifie)");
+    s.push_str(" (modifié)");
 }
 
-// &str est une slice de chaine : plus generique que &String, elle
-// fonctionne aussi bien sur des String que sur des litteraux "...".
+// &str est une slice de chaîne : plus générique que &String, elle
+// fonctionne aussi bien sur des String que sur des littéraux "...".
 fn extraire_premier_mot(s: &str) -> &str {
     match s.find(' ') {
         Some(index) => &s[..index],

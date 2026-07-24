@@ -1,14 +1,14 @@
-// 11 - Generiques et traits
+// 11 - Génériques et traits
 //
-// Les generiques evitent de dupliquer du code pour chaque type. Les
-// traits definissent un comportement partage (un peu comme une
-// interface) que differents types peuvent implementer.
+// Les génériques évitent de dupliquer du code pour chaque type. Les
+// traits définissent un comportement partagé (un peu comme une
+// interface) que différents types peuvent implémenter.
 //
 // Pour lancer cet exemple :
 //   cargo run --example 11_generics_and_traits
 
-// Fonction generique : T doit implementer PartialOrd (comparable) et
-// Copy (pour pouvoir renvoyer une valeur sans deplacer les elements
+// Fonction générique : T doit implémenter PartialOrd (comparable) et
+// Copy (pour pouvoir renvoyer une valeur sans déplacer les éléments
 // du slice). Ces contraintes s'appellent des "trait bounds".
 fn plus_grand<T: PartialOrd + Copy>(elements: &[T]) -> T {
     let mut max = elements[0];
@@ -20,7 +20,7 @@ fn plus_grand<T: PartialOrd + Copy>(elements: &[T]) -> T {
     max
 }
 
-// Struct generique sur deux types.
+// Struct générique sur deux types.
 struct Paire<A, B> {
     premier: A,
     second: B,
@@ -32,12 +32,12 @@ impl<A: std::fmt::Display, B: std::fmt::Display> Paire<A, B> {
     }
 }
 
-// Definition d'un trait : un contrat que plusieurs types peuvent honorer.
+// Définition d'un trait : un contrat que plusieurs types peuvent honorer.
 trait Forme {
     fn aire(&self) -> f64;
 
-    // Une methode par defaut : les types qui implementent Forme peuvent
-    // la garder telle quelle ou la redefinir.
+    // Une méthode par défaut : les types qui implémentent Forme peuvent
+    // la garder telle quelle ou la redéfinir.
     fn decrire(&self) -> String {
         format!("une forme d'aire {:.2}", self.aire())
     }
@@ -62,21 +62,21 @@ impl Forme for Carre {
         self.cote * self.cote
     }
 
-    // Ici on redefinit le comportement par defaut.
+    // Ici on redéfinit le comportement par défaut.
     fn decrire(&self) -> String {
-        format!("un carre de cote {} (aire {:.2})", self.cote, self.aire())
+        format!("un carré de côté {} (aire {:.2})", self.cote, self.aire())
     }
 }
 
-// impl Trait en parametre : accepte n'importe quel type implementant Forme,
-// sans avoir a ecrire de generique explicite <T: Forme>.
+// impl Trait en paramètre : accepte n'importe quel type implémentant Forme,
+// sans avoir à écrire de générique explicite <T: Forme>.
 fn afficher_description(forme: &impl Forme) {
     println!("{}", forme.decrire());
 }
 
-// dyn Trait : permet de stocker des types differents dans une seule
-// collection, tant qu'ils implementent tous le meme trait (dispatch
-// dynamique, resolu a l'execution plutot qu'a la compilation).
+// dyn Trait : permet de stocker des types différents dans une seule
+// collection, tant qu'ils implémentent tous le même trait (dispatch
+// dynamique, résolu à l'exécution plutôt qu'à la compilation).
 fn aire_totale(formes: &[Box<dyn Forme>]) -> f64 {
     formes.iter().map(|forme| forme.aire()).sum()
 }
@@ -129,6 +129,6 @@ mod tests {
     #[test]
     fn methode_redefinie_change_le_comportement() {
         let carre = Carre { cote: 2.0 };
-        assert!(carre.decrire().contains("carre de cote"));
+        assert!(carre.decrire().contains("carré de côté"));
     }
 }

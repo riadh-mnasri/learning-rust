@@ -1,16 +1,16 @@
 // 09 - Collections courantes : Vec, String, HashMap
 //
-// Les trois collections de la bibliotheque standard qu'on utilise le
-// plus au quotidien. Toutes allouent leurs donnees sur le tas et
+// Les trois collections de la bibliothèque standard qu'on utilise le
+// plus au quotidien. Toutes allouent leurs données sur le tas et
 // peuvent grandir dynamiquement, contrairement aux tableaux fixes.
 //
 // Pour lancer cet exemple :
 //   cargo run --example 09_collections
 
-// clippy::vec_init_then_push desactive volontairement : Vec::new() puis
-// push() est ecrit explicitement pour montrer cette API avant
-// d'utiliser la macro vec! juste apres. clippy::useless_vec aussi, pour
-// la meme raison qu'ailleurs dans ce depot.
+// clippy::vec_init_then_push désactivé volontairement : Vec::new() puis
+// push() est écrit explicitement pour montrer cette API avant
+// d'utiliser la macro vec! juste après. clippy::useless_vec aussi, pour
+// la même raison qu'ailleurs dans ce dépôt.
 #![allow(clippy::vec_init_then_push, clippy::useless_vec)]
 
 use std::collections::HashMap;
@@ -26,10 +26,10 @@ fn main() {
     // La macro vec! est un raccourci pour initialiser avec des valeurs.
     let notes = vec![12, 15, 9, 18];
 
-    // acces securise : get() renvoie Option<&T> au lieu de paniquer.
+    // accès sécurisé : get() renvoie Option<&T> au lieu de paniquer.
     match notes.get(10) {
-        Some(note) => println!("note a l'index 10 : {}", note),
-        None => println!("pas de note a l'index 10 (out of bounds)"),
+        Some(note) => println!("note à l'index 10 : {}", note),
+        None => println!("pas de note à l'index 10 (out of bounds)"),
     }
 
     let moyenne: f64 = notes.iter().sum::<i32>() as f64 / notes.len() as f64;
@@ -47,17 +47,17 @@ fn main() {
 
     // Une String est garantie UTF-8 valide : on ne peut pas l'indexer
     // directement par position d'octet comme un tableau, car un
-    // caractere peut occuper plusieurs octets. On itere sur les
-    // caracteres (chars) ou les octets (bytes) explicitement.
-    let mot = String::from("cafe");
-    println!("nombre de caracteres : {}", mot.chars().count());
+    // caractère peut occuper plusieurs octets. On itère sur les
+    // caractères (chars) ou les octets (bytes) explicitement.
+    let mot = String::from("café");
+    println!("nombre de caractères : {}", mot.chars().count());
     for (i, c) in mot.chars().enumerate() {
         print!("[{}:{}] ", i, c);
     }
     println!();
 
     let mots: Vec<&str> = phrase.split(' ').collect();
-    println!("mots decoupes : {:?}", mots);
+    println!("mots découpés : {:?}", mots);
 
     // --- HashMap<K, V> ---
     let mut ages: HashMap<String, u32> = HashMap::new();
@@ -70,10 +70,10 @@ fn main() {
         None => println!("personne inconnue"),
     }
 
-    // entry().or_insert() : modifie si present, insere sinon, en un
+    // entry().or_insert() : modifie si présent, insère sinon, en un
     // seul appel, sans double lookup.
     let compteur_ages = ages.entry(String::from("Syma")).or_insert(6);
-    *compteur_ages += 0; // deja la bonne valeur, juste pour illustrer l'acces mutable
+    *compteur_ages += 0; // déjà la bonne valeur, juste pour illustrer l'accès mutable
 
     for (nom, age) in &ages {
         println!("{} -> {} ans", nom, age);

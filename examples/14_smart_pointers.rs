@@ -1,9 +1,9 @@
 // 14 - Smart pointers : Box, Rc, RefCell
 //
-// Ces types encapsulent une valeur et ajoutent une capacite : Box
-// alloue sur le tas, Rc permet plusieurs proprietaires en lecture
-// seule, RefCell autorise la mutation controlee a l'execution plutot
-// qu'a la compilation.
+// Ces types encapsulent une valeur et ajoutent une capacité : Box
+// alloue sur le tas, Rc permet plusieurs propriétaires en lecture
+// seule, RefCell autorise la mutation contrôlée à l'exécution plutôt
+// qu'à la compilation.
 //
 // Pour lancer cet exemple :
 //   cargo run --example 14_smart_pointers
@@ -11,10 +11,10 @@
 use std::cell::RefCell;
 use std::rc::Rc;
 
-// Box<T> est indispensable pour les types recursifs : sans lui, le
-// compilateur ne peut pas connaitre la taille de Liste (elle contient
-// potentiellement une infinite d'elements imbriques). Box place les
-// donnees sur le tas et ne stocke qu'un pointeur de taille fixe.
+// Box<T> est indispensable pour les types récursifs : sans lui, le
+// compilateur ne peut pas connaître la taille de Liste (elle contient
+// potentiellement une infinité d'éléments imbriqués). Box place les
+// données sur le tas et ne stocke qu'un pointeur de taille fixe.
 #[derive(Debug)]
 enum Liste {
     Element(i32, Box<Liste>),
@@ -30,10 +30,10 @@ fn somme_liste(liste: &Liste) -> i32 {
     }
 }
 
-// Rc<T> (Reference Counted) permet a plusieurs parties du programme de
-// partager la possession d'une meme valeur en lecture. Le compteur de
-// references augmente avec clone() et diminue quand un Rc est droppe ;
-// la valeur n'est liberee que quand ce compteur atteint zero.
+// Rc<T> (Reference Counted) permet à plusieurs parties du programme de
+// partager la possession d'une même valeur en lecture. Le compteur de
+// références augmente avec clone() et diminue quand un Rc est droppé ;
+// la valeur n'est libérée que quand ce compteur atteint zéro.
 #[derive(Debug)]
 struct Configuration {
     nom_application: String,
@@ -47,12 +47,12 @@ fn main() {
     let config = Rc::new(Configuration {
         nom_application: String::from("learning-rust"),
     });
-    println!("compteur de references initial : {}", Rc::strong_count(&config));
+    println!("compteur de références initial : {}", Rc::strong_count(&config));
 
     let config_module_a = Rc::clone(&config);
     let config_module_b = Rc::clone(&config);
     println!(
-        "apres deux clones, compteur = {}",
+        "après deux clones, compteur = {}",
         Rc::strong_count(&config)
     );
     println!(
@@ -62,15 +62,15 @@ fn main() {
 
     drop(config_module_a);
     println!(
-        "apres un drop, compteur = {}",
+        "après un drop, compteur = {}",
         Rc::strong_count(&config)
     );
 
-    // RefCell<T> deplace la verification des regles d'emprunt (une
-    // reference mutable exclusive OU plusieurs immuables) de la
-    // compilation vers l'execution. Cela permet de muter une valeur
-    // meme quand on n'y a qu'un acces immuable en apparence (le
-    // "mutable borrow interieur", ou "interior mutability").
+    // RefCell<T> déplace la vérification des règles d'emprunt (une
+    // référence mutable exclusive OU plusieurs immuables) de la
+    // compilation vers l'exécution. Cela permet de muter une valeur
+    // même quand on n'y a qu'un accès immuable en apparence (le
+    // "mutable borrow intérieur", ou "interior mutability").
     let compteur_visites = RefCell::new(0);
     {
         let mut acces_mutable = compteur_visites.borrow_mut();
@@ -84,18 +84,18 @@ fn main() {
 
     println!("compteur de visites = {}", compteur_visites.borrow());
 
-    // Rc<RefCell<T>> combine les deux : plusieurs proprietaires qui
-    // peuvent chacun modifier la valeur partagee. Tres courant pour
-    // representer un etat partage et mutable sans thread (voir
-    // l'exemple 15 pour l'equivalent thread-safe avec Arc<Mutex<T>>).
-    let etat_partage = Rc::new(RefCell::new(vec![String::from("premiere entree")]));
+    // Rc<RefCell<T>> combine les deux : plusieurs propriétaires qui
+    // peuvent chacun modifier la valeur partagée. Très courant pour
+    // représenter un état partagé et mutable sans thread (voir
+    // l'exemple 15 pour l'équivalent thread-safe avec Arc<Mutex<T>>).
+    let etat_partage = Rc::new(RefCell::new(vec![String::from("première entrée")]));
     let etat_pour_a = Rc::clone(&etat_partage);
     let etat_pour_b = Rc::clone(&etat_partage);
 
-    etat_pour_a.borrow_mut().push(String::from("ajoute par a"));
-    etat_pour_b.borrow_mut().push(String::from("ajoute par b"));
+    etat_pour_a.borrow_mut().push(String::from("ajouté par a"));
+    etat_pour_b.borrow_mut().push(String::from("ajouté par b"));
 
-    println!("etat partage final : {:?}", etat_partage.borrow());
+    println!("état partagé final : {:?}", etat_partage.borrow());
 }
 
 #[cfg(test)]

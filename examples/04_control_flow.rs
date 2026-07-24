@@ -1,6 +1,6 @@
-// 04 - Structures de controle
+// 04 - Structures de contrôle
 //
-// if/else, boucles (loop, while, for) et un premier apercu de match.
+// if/else, boucles (loop, while, for) et un premier aperçu de match.
 // Le pattern matching complet (avec enums) arrive dans l'exemple 08.
 //
 // Pour lancer cet exemple :
@@ -10,7 +10,7 @@ fn main() {
     // if est une expression : on peut l'utiliser directement dans un let.
     let note = 14;
     let mention = if note >= 16 {
-        "tres bien"
+        "très bien"
     } else if note >= 14 {
         "bien"
     } else if note >= 10 {
@@ -20,7 +20,7 @@ fn main() {
     };
     println!("note {} -> mention {}", note, mention);
 
-    // loop est une boucle infinie qu'on arrete explicitement avec break.
+    // loop est une boucle infinie qu'on arrête explicitement avec break.
     // break peut aussi renvoyer une valeur, ce qui en fait une expression.
     let mut compteur = 0;
     let resultat = loop {
@@ -29,12 +29,12 @@ fn main() {
             break compteur * 10;
         }
     };
-    println!("loop a boucle jusqu'a {} puis renvoye {}", compteur, resultat);
+    println!("loop a boucle jusqu'à {} puis renvoyé {}", compteur, resultat);
 
-    // while : condition classique, verifiee avant chaque iteration.
+    // while : condition classique, vérifiée avant chaque itération.
     let mut restant = 3;
     while restant > 0 {
-        println!("compte a rebours : {}", restant);
+        println!("compte à rebours : {}", restant);
         restant -= 1;
     }
 
@@ -44,20 +44,20 @@ fn main() {
     }
     println!();
 
-    // for sur une collection : la maniere idiomatique de parcourir un
+    // for sur une collection : la manière idiomatique de parcourir un
     // tableau ou un vecteur, sans manipuler d'index manuellement.
     let fruits = ["pomme", "banane", "cerise"];
     for fruit in fruits.iter() {
         println!("fruit : {}", fruit);
     }
 
-    // enumerate() donne acces a l'index quand on en a vraiment besoin.
+    // enumerate() donne accès à l'index quand on en a vraiment besoin.
     for (index, fruit) in fruits.iter().enumerate() {
         println!("fruit {} = {}", index, fruit);
     }
 
     // Les labels de boucle permettent de cibler une boucle externe
-    // depuis une boucle imbriquee.
+    // depuis une boucle imbriquée.
     let mut trouve = None;
     'externe: for x in 0..5 {
         for y in 0..5 {
@@ -74,7 +74,7 @@ fn main() {
 mod tests {
     fn mention_pour(note: i32) -> &'static str {
         if note >= 16 {
-            "tres bien"
+            "très bien"
         } else if note >= 14 {
             "bien"
         } else if note >= 10 {
@@ -86,7 +86,7 @@ mod tests {
 
     #[test]
     fn mention_correcte_selon_la_note() {
-        assert_eq!(mention_pour(18), "tres bien");
+        assert_eq!(mention_pour(18), "très bien");
         assert_eq!(mention_pour(10), "passable");
         assert_eq!(mention_pour(5), "insuffisant");
     }

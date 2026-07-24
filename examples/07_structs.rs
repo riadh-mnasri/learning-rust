@@ -1,8 +1,8 @@
-// 07 - Structs et methodes
+// 07 - Structs et méthodes
 //
-// Une struct regroupe des donnees liees sous un seul type. Les blocs
-// impl ajoutent des methodes (qui prennent self) et des fonctions
-// associees (qui n'en prennent pas, souvent des constructeurs).
+// Une struct regroupe des données liées sous un seul type. Les blocs
+// impl ajoutent des méthodes (qui prennent self) et des fonctions
+// associées (qui n'en prennent pas, souvent des constructeurs).
 //
 // Pour lancer cet exemple :
 //   cargo run --example 07_structs
@@ -14,8 +14,8 @@ struct Rectangle {
 }
 
 impl Rectangle {
-    // Fonction associee (pas de `self`) : convention pour un
-    // constructeur, appelee via Rectangle::carre(5.0).
+    // Fonction associée (pas de `self`) : convention pour un
+    // constructeur, appelée via Rectangle::carre(5.0).
     fn carre(cote: f64) -> Rectangle {
         Rectangle {
             largeur: cote,
@@ -23,7 +23,7 @@ impl Rectangle {
         }
     }
 
-    // Methode avec emprunt immuable : lit les champs sans les modifier.
+    // Méthode avec emprunt immuable : lit les champs sans les modifier.
     fn aire(&self) -> f64 {
         self.largeur * self.hauteur
     }
@@ -32,7 +32,7 @@ impl Rectangle {
         self.largeur == self.hauteur
     }
 
-    // Methode avec emprunt mutable : autorisee a modifier les champs.
+    // Méthode avec emprunt mutable : autorisée à modifier les champs.
     fn agrandir(&mut self, facteur: f64) {
         self.largeur *= facteur;
         self.hauteur *= facteur;
@@ -52,21 +52,21 @@ fn main() {
     };
     println!("rectangle : {:?}", rect);
     println!("aire = {}", rect.aire());
-    println!("est un carre ? {}", rect.est_carre());
+    println!("est un carré ? {}", rect.est_carre());
 
     rect.agrandir(2.0);
-    println!("apres agrandissement : {:?}, aire = {}", rect, rect.aire());
+    println!("après agrandissement : {:?}, aire = {}", rect, rect.aire());
 
     let carre = Rectangle::carre(5.0);
-    println!("carre : {:?}, est un carre ? {}", carre, carre.est_carre());
+    println!("carré : {:?}, est un carré ? {}", carre, carre.est_carre());
 
     let origine = Point(0.0, 0.0);
     println!("point : ({}, {})", origine.0, origine.1);
 
     let _marqueur = Marqueur;
 
-    // Syntaxe de mise a jour : cree une nouvelle instance en reprenant
-    // les champs non precises depuis une autre instance existante.
+    // Syntaxe de mise à jour : crée une nouvelle instance en reprenant
+    // les champs non précisés depuis une autre instance existante.
     let autre_rect = Rectangle {
         largeur: 100.0,
         ..carre

@@ -1,15 +1,15 @@
 // 02 - Variables et types
 //
-// Rust est statiquement type : chaque valeur a un type connu a la
-// compilation. Le compilateur infere souvent ce type, mais on peut
+// Rust est statiquement typé : chaque valeur a un type connu à la
+// compilation. Le compilateur infère souvent ce type, mais on peut
 // toujours l'annoter explicitement.
 //
 // Pour lancer cet exemple :
 //   cargo run --example 02_variables_and_types
 
 fn main() {
-    // Par defaut, une variable est immuable. Cette ligne ne compilerait
-    // pas si on essayait de reaffecter `age` plus loin sans `mut`.
+    // Par défaut, une variable est immuable. Cette ligne ne compilerait
+    // pas si on essayait de réaffecter `age` plus loin sans `mut`.
     let age: u32 = 33;
     println!("age = {}", age);
 
@@ -19,16 +19,16 @@ fn main() {
     compteur += 1;
     println!("compteur = {}", compteur);
 
-    // Shadowing : on peut redeclarer une variable du meme nom, y compris
-    // avec un type different. Ce n'est pas de la mutation, c'est une
+    // Shadowing : on peut redéclarer une variable du même nom, y compris
+    // avec un type différent. Ce n'est pas de la mutation, c'est une
     // nouvelle variable qui masque l'ancienne.
     let valeur = "42";
-    let valeur: i32 = valeur.parse().expect("devrait etre un nombre");
+    let valeur: i32 = valeur.parse().expect("devrait être un nombre");
     let valeur = valeur * 2;
-    println!("valeur apres shadowing = {}", valeur);
+    println!("valeur après shadowing = {}", valeur);
 
-    // Types scalaires principaux : entiers (signes/non signes, 8 a 128
-    // bits), flottants, booleens, caracteres.
+    // Types scalaires principaux : entiers (signés/non signés, 8 à 128
+    // bits), flottants, booléens, caractères.
     let entier_signe: i32 = -7;
     let entier_non_signe: u8 = 255;
     let flottant: f64 = 9.81;
@@ -40,19 +40,19 @@ fn main() {
         entier_signe, entier_non_signe, flottant, vrai_ou_faux, caractere
     );
 
-    // Tuple : regroupe des valeurs de types differents, taille fixe.
+    // Tuple : regroupe des valeurs de types différents, taille fixe.
     let personne: (&str, u32, bool) = ("Riadh", 33, true);
     let (nom, age_personne, actif) = personne; // destructuration
     println!("{} a {} ans, actif = {}", nom, age_personne, actif);
-    println!("acces par index : {}", personne.0);
+    println!("accès par index : {}", personne.0);
 
-    // Tableau : taille fixe, elements du meme type, alloue sur la pile.
+    // Tableau : taille fixe, éléments du même type, alloué sur la pile.
     let semaine: [&str; 7] = ["lun", "mar", "mer", "jeu", "ven", "sam", "dim"];
     println!("jour 3 = {}", semaine[2]);
     println!("nombre de jours = {}", semaine.len());
 
     // Une constante doit avoir un type explicite et une valeur connue
-    // a la compilation. Convention : SCREAMING_SNAKE_CASE.
+    // à la compilation. Convention : SCREAMING_SNAKE_CASE.
     const LIMITE_TENTATIVES: u32 = 3;
     println!("limite de tentatives = {}", LIMITE_TENTATIVES);
 }
