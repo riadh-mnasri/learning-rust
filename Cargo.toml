@@ -1,0 +1,79 @@
+[package]
+name = "learning-rust"
+version = "0.1.0"
+edition = "2021"
+description = "Parcours d'apprentissage du langage Rust, du zero absolu jusqu'aux bases de la concurrence et de l'async"
+license = "MIT"
+authors = ["Riadh MNASRI"]
+publish = false
+
+[dependencies]
+
+[dev-dependencies]
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "time"] }
+
+# test = true sur chaque exemple permet a `cargo test` d'executer aussi
+# les tests inline definis dans examples/, pas seulement ceux de src/.
+[[example]]
+name = "01_hello_world"
+test = true
+
+[[example]]
+name = "02_variables_and_types"
+test = true
+
+[[example]]
+name = "03_functions"
+test = true
+
+[[example]]
+name = "04_control_flow"
+test = true
+
+[[example]]
+name = "05_ownership"
+test = true
+
+[[example]]
+name = "06_borrowing_and_references"
+test = true
+
+[[example]]
+name = "07_structs"
+test = true
+
+[[example]]
+name = "08_enums_and_pattern_matching"
+test = true
+
+[[example]]
+name = "09_collections"
+test = true
+
+[[example]]
+name = "10_error_handling"
+test = true
+
+[[example]]
+name = "11_generics_and_traits"
+test = true
+
+[[example]]
+name = "12_lifetimes"
+test = true
+
+[[example]]
+name = "13_closures_and_iterators"
+test = true
+
+[[example]]
+name = "14_smart_pointers"
+test = true
+
+[[example]]
+name = "15_concurrency"
+test = true
+
+[[example]]
+name = "16_async_intro"
+test = true
