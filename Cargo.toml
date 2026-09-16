@@ -77,3 +77,15 @@ test = true
 [[example]]
 name = "16_async_intro"
 test = true
+
+[[example]]
+name = "17_modules"
+test = true
+
+[[example]]
+name = "18_macros"
+test = true
+
+[[example]]
+name = "19_custom_traits"
+test = true

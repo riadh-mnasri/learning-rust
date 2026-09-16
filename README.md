@@ -77,13 +77,19 @@ d'explication.
 | 14 | [`smart_pointers`](examples/14_smart_pointers.rs) | `Box`, `Rc`, `RefCell`, mutabilité intérieure |
 | 15 | [`concurrency`](examples/15_concurrency.rs) | Threads, `Arc<Mutex<T>>`, canaux `mpsc` |
 | 16 | [`async_intro`](examples/16_async_intro.rs) | `async`/`await`, runtime Tokio, `join!`, `spawn` |
+| 17 | [`modules`](examples/17_modules/main.rs) | Organisation multi-fichiers, `mod`, visibilité `pub`/`pub(crate)` |
+| 18 | [`macros`](examples/18_macros.rs) | Macros déclaratives, `macro_rules!`, répétition `$(...)* ` |
+| 19 | [`custom_traits`](examples/19_custom_traits.rs) | Implémenter `Iterator`, `From`/`Into` sur ses propres types |
 
 ## Structure du dépôt
 
 Un seul crate Cargo (`learning-rust`), sans code de bibliothèque
 (`src/lib.rs` est volontairement vide de logique). Tout le contenu
-pédagogique vit dans `examples/`, où chaque fichier est à la fois un
-binaire exécutable et un module de tests.
+pédagogique vit dans `examples/`, où chaque exemple est à la fois un
+binaire exécutable et un module de tests. La plupart tiennent dans un
+seul fichier ; `17_modules` est un sous-dossier (`examples/17_modules/main.rs`
++ fichiers associés), pour illustrer l'organisation multi-fichiers
+qu'il enseigne.
 
 ```
 learning-rust/
@@ -92,17 +98,21 @@ learning-rust/
     01_hello_world.rs
     ...
     16_async_intro.rs
+    17_modules/
+      main.rs
+      catalogue.rs
+      emprunts.rs
+    18_macros.rs
+    19_custom_traits.rs
   src/
     lib.rs
 ```
 
 ## État d'avancement
 
-Les 16 notions listées ci-dessus sont écrites, testées et vérifiées
-avec clippy. Pistes pour la suite, non prévues à une date précise :
-modules et organisation de crate multi-fichiers, macros déclaratives,
-traits `Iterator`/`From`/`Into` écrits à la main, un petit projet de
-synthèse (CLI) qui recombine plusieurs notions.
+Les 19 notions listées ci-dessus sont écrites, testées et vérifiées
+avec clippy. Piste pour la suite, non prévue à une date précise : un
+petit projet de synthèse (CLI) qui recombine plusieurs notions.
 
 ## Licence
 

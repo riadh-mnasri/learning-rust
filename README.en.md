@@ -76,13 +76,18 @@ A few clippy warnings are deliberately disabled (via a top-of-file
 | 14 | [`smart_pointers`](examples/14_smart_pointers.rs) | `Box`, `Rc`, `RefCell`, interior mutability |
 | 15 | [`concurrency`](examples/15_concurrency.rs) | Threads, `Arc<Mutex<T>>`, `mpsc` channels |
 | 16 | [`async_intro`](examples/16_async_intro.rs) | `async`/`await`, the Tokio runtime, `join!`, `spawn` |
+| 17 | [`modules`](examples/17_modules/main.rs) | Multi-file organization, `mod`, `pub`/`pub(crate)` visibility |
+| 18 | [`macros`](examples/18_macros.rs) | Declarative macros, `macro_rules!`, `$(...)* ` repetition |
+| 19 | [`custom_traits`](examples/19_custom_traits.rs) | Implementing `Iterator`, `From`/`Into` on your own types |
 
 ## Repository layout
 
 A single Cargo crate (`learning-rust`), with no real library code
 (`src/lib.rs` is intentionally empty of logic). All the teaching
-content lives in `examples/`, where each file is both a runnable
-binary and a test module.
+content lives in `examples/`, where each example is both a runnable
+binary and a test module. Most fit in a single file; `17_modules` is a
+subdirectory (`examples/17_modules/main.rs` plus its supporting files),
+to demonstrate the multi-file organization it teaches.
 
 ```
 learning-rust/
@@ -91,17 +96,21 @@ learning-rust/
     01_hello_world.rs
     ...
     16_async_intro.rs
+    17_modules/
+      main.rs
+      catalogue.rs
+      emprunts.rs
+    18_macros.rs
+    19_custom_traits.rs
   src/
     lib.rs
 ```
 
 ## Status
 
-All 16 concepts listed above are written, tested, and clippy-clean.
-Ideas for later, with no fixed date: multi-file crate organization and
-modules, declarative macros, hand-written `Iterator`/`From`/`Into`
-implementations, a small wrap-up CLI project combining several of
-these concepts.
+All 19 concepts listed above are written, tested, and clippy-clean.
+Idea for later, with no fixed date: a small wrap-up CLI project
+combining several of these concepts.
 
 ## License
 
